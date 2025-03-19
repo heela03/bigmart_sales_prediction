@@ -9,7 +9,7 @@ st.set_page_config(
     page_icon="👋"
 )
 
-st.write("# Welcome to Our Page! 👋")
+st.write("# Welcome to Bigmart Sales Prediction!")
 
 st.write("""
     This application allows you to predict the sales of items in retail outlets based on various input features.
@@ -17,10 +17,11 @@ st.write("""
     **Main Features:**
     1. **Sales Prediction**: Predict sales based on item details such as weight, fat content, visibility, and price.
     2. **Data Visualizations**: Explore insightful visualizations that highlight sales performance by outlet type, location, size, and more.
+    3. **Stock Prediction**: Estimate monthly stock requirements based on predicted sales and historical sales trends.
     
     Use the radio buttons above to navigate through the different sections. Start predicting or explore the data through the visualizations!
     
-    Enjoy using the app, and feel free to experiment with the custom visualization feature to create your own analysis.
+    
     """)
 
 tab1,tab2 = st.tabs(['Predict','Data Visualization'])
@@ -90,14 +91,17 @@ with tab1:
             try:
                 pred = reg.predict(new_data)
                 price = np.exp(pred)
-                monthly_price = price[0] / 12
+                scaling_factor = 1.2
+                monthly_price = (price[0] / 12) * scaling_factor
                 yearly_price = price[0] * 12
-                predicted_monthly_stock = monthly_price // item_price if item_price > 0 else 0
+                avg_sales_ratio = 0.15 
+                predicted_monthly_stock = max((monthly_price * avg_sales_ratio) // item_price, 1) if item_price > 0 else 1
                 predicted_total_stock = yearly_price // item_price if item_price > 0 else 0
                 st.success(f"The predicted sales for Item ID {item_id} and Item Type {item_type} is ₹{price[0].round(2)}")
                 st.info(f"Estimated Monthly Sales: ₹{monthly_price.round(2)}")
                 st.info(f"Estimated Yearly Sales: ₹{yearly_price.round(2)}")
                 st.info(f"Predicted Monthly Stock Requirement: {predicted_monthly_stock.round()} units")
+                st.info(f"Predicted Yearly Stock Requirement: {predicted_total_stock.round()} units")
                 st.info(f"Predicted Yearly Stock Requirement: {predicted_total_stock.round()} units")
                 
             except Exception as e:
