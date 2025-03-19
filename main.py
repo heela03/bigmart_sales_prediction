@@ -94,9 +94,9 @@ with tab1:
                 pred = reg.predict(new_data)
                 price = np.exp(pred)
                 scaling_factor = 1.2
-                monthly_price = (price[0] / 12) * scaling_factor
+                monthly_price = (price[0] / 10) * scaling_factor
                 yearly_price = price[0] * 12
-                avg_sales_ratio = 0.2
+                avg_sales_ratio = 2
                 min_stock_threshold = 5 
                 predicted_monthly_stock = max((monthly_price * avg_sales_ratio) // (item_price if item_price > 0 else 1), min_stock_threshold)
                 predicted_total_stock = yearly_price // item_price if item_price > 0 else 0
