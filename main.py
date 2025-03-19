@@ -7,21 +7,8 @@ import plotly.express as px
 st.set_page_config(
     page_title='Sales Prediction',
     page_icon="👋",
-    layout="wide",
-    initial_sidebar_state="expanded"
+    
 )
-st.markdown(
-    """
-    <style>
-    body {
-        background-color: white;
-        color: black;
-    }
-    </style>
-    """,
-    unsafe_allow_html=True
-)
-
 
 
 st.write("# Bigmart Sales Analysis!")
@@ -116,7 +103,7 @@ with tab1:
                 st.success(f"The predicted sales for Item ID {item_id} and Item Type {item_type} is ₹{price[0].round(2)}")
                 st.info(f"Estimated Monthly Sales: ₹{monthly_price.round(2)}")
                 st.info(f"Estimated Yearly Sales: ₹{yearly_price.round(2)}")
-                st.info(f"Predicted Monthly Stock Requirement: {predicted_monthly_stock.round(0)} units")
+                st.info(f"Predicted Monthly Stock Requirement: {round(float(predicted_monthly_stock))} units")
                 st.info(f"Predicted Yearly Stock Requirement: {predicted_total_stock.round(0)} units")
                 
                 
