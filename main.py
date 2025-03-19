@@ -106,7 +106,7 @@ with tab1:
                 st.info(f"Estimated Yearly Sales: ₹{yearly_price.round(2)}")
                 st.info(f"Predicted Monthly Stock Requirement: {round(float(predicted_monthly_stock))} units")
                 st.info(f"Predicted Yearly Stock Requirement: {predicted_total_stock.round(0)} units")
-                if predicted_monthly_stock < low_stock_threshold:
+                if predicted_monthly_stock < low_stock:
                     st.warning("⚠️ Low Stock Alert: Consider restocking soon!")
 
                 
