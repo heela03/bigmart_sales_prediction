@@ -94,12 +94,13 @@ with tab1:
                 pred = reg.predict(new_data)
                 price = np.exp(pred)
                 scaling_factor = 1.5
-                monthly_price = (price[0] / 10) * scaling_factor
+                
                 yearly_price = price[0] * 12
+                monthly_price = (yearly_price / 10) * scaling_factor
                 
                 
                 low_stock= 10
-                predicted_monthly_stock = monthly_price*2 // item_price if item_price > 0 else 0
+                predicted_monthly_stock = monthly_price*3 // item_price if item_price > 0 else 0
                 predicted_total_stock = yearly_price // item_price if item_price > 0 else 0
                 st.success(f"The predicted sales for Item ID {item_id} and Item Type {item_type} is ₹{price[0].round(2)}")
                 st.info(f"Estimated Monthly Sales: ₹{monthly_price.round(2)}")
