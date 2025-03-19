@@ -7,7 +7,22 @@ import plotly.express as px
 st.set_page_config(
     page_title='Sales Prediction',
     page_icon="👋"
+    layout="wide"
+    initial_sidebar_state="expanded"
 )
+st.markdown(
+    """
+    <style>
+    body {
+        background-color: white;
+        color: black;
+    }
+    </style>
+    """,
+    unsafe_allow_html=True
+)
+
+
 
 st.write("# Welcome to Bigmart Sales Prediction!")
 
@@ -94,15 +109,16 @@ with tab1:
                 scaling_factor = 1.2
                 monthly_price = (price[0] / 12) * scaling_factor
                 yearly_price = price[0] * 12
-                avg_sales_ratio = 0.15 
-                predicted_monthly_stock = max((monthly_price * avg_sales_ratio) // item_price, 1) if item_price > 0 else 1
+                avg_sales_ratio = 0.2
+                min_stock_threshold = 5 
+                predicted_monthly_stock = max((monthly_price * avg_sales_ratio) // (item_price if item_price > 0 else 1), min_stock_threshold)
                 predicted_total_stock = yearly_price // item_price if item_price > 0 else 0
                 st.success(f"The predicted sales for Item ID {item_id} and Item Type {item_type} is ₹{price[0].round(2)}")
                 st.info(f"Estimated Monthly Sales: ₹{monthly_price.round(2)}")
                 st.info(f"Estimated Yearly Sales: ₹{yearly_price.round(2)}")
                 st.info(f"Predicted Monthly Stock Requirement: {predicted_monthly_stock.round(0)} units")
                 st.info(f"Predicted Yearly Stock Requirement: {predicted_total_stock.round(0)} units")
-                st.info(f"Predicted Yearly Stock Requirement: {predicted_total_stock.round(0)} units")
+                
                 
             except Exception as e:
                 st.error(f"An error occurred during prediction: {e}")
