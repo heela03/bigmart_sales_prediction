@@ -6,12 +6,12 @@ import plotly.express as px
 
 st.set_page_config(
     page_title='Sales Prediction',
-    page_icon="👋",
+    page_icon="📈"
     
 )
 
 
-st.write("# Bigmart Sales Analysis!")
+st.write("# Bigmart Sales Analysis! 🛒📈📊")
 
 st.write("""
     This application allows you to predict the sales of items in retail outlets based on various input features.
@@ -98,13 +98,17 @@ with tab1:
                 yearly_price = price[0] * 12
                 avg_sales_ratio = 2
                 min_stock_threshold = 5 
-                predicted_monthly_stock = max((monthly_price * avg_sales_ratio) // (item_price if item_price > 0 else 1), min_stock_threshold)
+                low_stock= 10
+                predicted_monthly_stock = monthly_price*avg_sales_ratio // item_price if item_price > 0 else 0
                 predicted_total_stock = yearly_price // item_price if item_price > 0 else 0
                 st.success(f"The predicted sales for Item ID {item_id} and Item Type {item_type} is ₹{price[0].round(2)}")
                 st.info(f"Estimated Monthly Sales: ₹{monthly_price.round(2)}")
                 st.info(f"Estimated Yearly Sales: ₹{yearly_price.round(2)}")
                 st.info(f"Predicted Monthly Stock Requirement: {round(float(predicted_monthly_stock))} units")
                 st.info(f"Predicted Yearly Stock Requirement: {predicted_total_stock.round(0)} units")
+                if predicted_monthly_stock < low_stock_threshold:
+                    st.warning("⚠️ Low Stock Alert: Consider restocking soon!")
+
                 
                 
             except Exception as e:
