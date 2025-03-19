@@ -66,8 +66,8 @@ with tab1:
         size = st.selectbox('Outlet Size', clean_df['Outlet_Size'].unique(), help="Select the size of the outlet.")
         location = st.selectbox('Outlet Location Type', clean_df['Outlet_Location_Type'].unique(), help="Select the location type of the outlet.")
         outlet_type = st.selectbox('Outlet Type', clean_df['Outlet_Type'].unique(), help="Select the type of the outlet.")
-        st.header("Stock Details")
-        available_stock = st.number_input('Available Stock', min_value=0, help="Enter the current stock level of the item.")
+        
+        
 
         # Prediction button
         if st.button('Predict Sales'):
@@ -92,11 +92,14 @@ with tab1:
                 price = np.exp(pred)
                 monthly_price = price[0] / 12
                 yearly_price = price[0] * 12
-                recommended_stock = monthly_price * 3
-                st.success(f"The predicted sales for Item ID {item_id} is ₹{price[0].round(2)}")
+                predicted_monthly_stock = monthly_price // item_price if item_price > 0 else 0
+                predicted_total_stock = yearly_price // item_price if item_price > 0 else 0
+                st.success(f"The predicted sales for Item ID {item_id} and Item Type {item_type} is ₹{price[0].round(2)}")
                 st.info(f"Estimated Monthly Sales: ₹{monthly_price.round(2)}")
                 st.info(f"Estimated Yearly Sales: ₹{yearly_price.round(2)}")
-                st.info(f"Recommended Minimum Stock Level: {recommended_stock.round()} units")
+                st.info(f"Predicted Monthly Stock Requirement: {predicted_monthly_stock.round()} units")
+                st.info(f"Predicted Yearly Stock Requirement: {predicted_total_stock.round()} units")
+                
             except Exception as e:
                 st.error(f"An error occurred during prediction: {e}")
 
