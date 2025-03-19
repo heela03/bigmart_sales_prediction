@@ -6,8 +6,8 @@ import plotly.express as px
 
 st.set_page_config(
     page_title='Sales Prediction',
-    page_icon="👋"
-    layout="wide"
+    page_icon="👋",
+    layout="wide",
     initial_sidebar_state="expanded"
 )
 st.markdown(
