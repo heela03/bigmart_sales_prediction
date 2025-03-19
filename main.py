@@ -88,6 +88,7 @@ with tab1:
             try:
                 pred = reg.predict(new_data)
                 price = np.exp(pred)
+                monthly_price = price[0] / 12
                 yearly_price = price[0] * 12 
                 st.success(f"The predicted sales for Item ID {item_id} is ₹{price[0].round(2)}")
                 st.info(f"Estimated Monthly Sales: ₹{monthly_price.round(2)}")
