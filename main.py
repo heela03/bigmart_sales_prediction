@@ -86,8 +86,8 @@ with tab1:
             try:
                 pred = reg.predict(new_data)
                 price = np.exp(pred)
-                st.success(f"The predicted sales for Item ID {item_id} is ₹{price[0].round(2)}")
-            except Exception as e:
+                st.success(f"The predicted log-transformed sales for Item ID {item_id} is ₹{np.log(log_sales[0]).round(2)}")  # Log-transform the output
+
                 st.error(f"An error occurred during prediction: {e}")
 
 with tab2:
