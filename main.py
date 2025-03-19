@@ -24,7 +24,7 @@ st.markdown(
 
 
 
-st.write("# Welcome to Bigmart Sales Prediction!")
+st.write("# Bigmart Sales Analysis!")
 
 st.write("""
     This application allows you to predict the sales of items in retail outlets based on various input features.
