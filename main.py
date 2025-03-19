@@ -100,9 +100,9 @@ with tab1:
                 st.success(f"The predicted sales for Item ID {item_id} and Item Type {item_type} is ₹{price[0].round(2)}")
                 st.info(f"Estimated Monthly Sales: ₹{monthly_price.round(2)}")
                 st.info(f"Estimated Yearly Sales: ₹{yearly_price.round(2)}")
-                st.info(f"Predicted Monthly Stock Requirement: {predicted_monthly_stock.round()} units")
-                st.info(f"Predicted Yearly Stock Requirement: {predicted_total_stock.round()} units")
-                st.info(f"Predicted Yearly Stock Requirement: {predicted_total_stock.round()} units")
+                st.info(f"Predicted Monthly Stock Requirement: {predicted_monthly_stock.round(0)} units")
+                st.info(f"Predicted Yearly Stock Requirement: {predicted_total_stock.round(0)} units")
+                st.info(f"Predicted Yearly Stock Requirement: {predicted_total_stock.round(0)} units")
                 
             except Exception as e:
                 st.error(f"An error occurred during prediction: {e}")
