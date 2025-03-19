@@ -9,16 +9,18 @@ st.set_page_config(
     page_icon="👋"
 )
 
-st.write("# Hey There")
+st.write("# Welcome to Our Page! 👋")
 
 st.write("""
-    
+    This application allows you to predict the sales of items in retail outlets based on various input features.
     
     **Main Features:**
     1. **Sales Prediction**: Predict sales based on item details such as weight, fat content, visibility, and price.
     2. **Data Visualizations**: Explore insightful visualizations that highlight sales performance by outlet type, location, size, and more.
     
+    Use the radio buttons above to navigate through the different sections. Start predicting or explore the data through the visualizations!
     
+    Enjoy using the app, and feel free to experiment with the custom visualization feature to create your own analysis.
     """)
 
 tab1,tab2 = st.tabs(['Predict','Data Visualization'])
@@ -86,8 +88,11 @@ with tab1:
             try:
                 pred = reg.predict(new_data)
                 price = np.exp(pred)
-                st.success(f"The predicted log-transformed sales for Item ID {item_id} is ₹{np.log(log_sales[0]).round(2)}")  # Log-transform the output
-
+                yearly_price = price[0] * 12 
+                st.success(f"The predicted sales for Item ID {item_id} is ₹{price[0].round(2)}")
+                st.info(f"Estimated Monthly Sales: ₹{monthly_price.round(2)}")
+                st.info(f"Estimated Yearly Sales: ₹{yearly_price.round(2)}")
+            except Exception as e:
                 st.error(f"An error occurred during prediction: {e}")
 
 with tab2:
