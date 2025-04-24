@@ -93,10 +93,10 @@ with tab1:
             try:
                 pred = reg.predict(new_data)
                 price = np.exp(pred)
-                scaling_factor = 1.1
+                scaling_factor = 1.7
                 
                 yearly_price = price[0] * 12
-                monthly_price = (yearly_price / 11) * scaling_factor
+                monthly_price = (yearly_price / 12) * scaling_factor
                 
                 
                 low_stock= 10
