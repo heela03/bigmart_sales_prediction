@@ -24,7 +24,7 @@ tab1, tab2 = st.tabs(['Predict', 'Data Visualization'])
 
 with tab1:
     try:
-        reg = joblib.load('Ridge_Regression_best_model.pkl')  # ✅ FIXED
+        reg = joblib.load('Ridge_Regression_best_model (4).pkl')  # ✅ FIXED
         clean_df = pd.read_csv('cleaned_data.csv')
     except FileNotFoundError as e:
         st.error(f"Error loading files: {e}")
